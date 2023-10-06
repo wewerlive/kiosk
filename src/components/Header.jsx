@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <Disclosure
       as='nav'
-      className='bg-gray-800 w-full drop-shadow-2xl sticky top-0 z-50'
+      className='bg-gray-800 w-screen drop-shadow-2xl sticky top-0 z-50'
     >
       {({ open }) => (
         <>
