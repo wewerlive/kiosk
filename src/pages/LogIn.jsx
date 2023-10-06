@@ -2,8 +2,107 @@ import Logo from '../assets/Logo.png';
 import Footer from '../components/Footer';
 import { Newsletters } from './SignUp';
 import './login.css';
+import { useEffect, useRef } from 'react';
+import { loginRoute,verifyRoute } from '../api/routes';
+import axios from '../api/Axios';
 
 const Login = () => {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  useEffect(() => {
+    if (getToken()) {
+      console.log(getToken(), 'token');
+      verifyUser();
+    }
+  }, []);
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    try {
+      const response = axios.post(
+        loginRoute,
+        JSON.stringify({
+          username: email,
+          password,
+        }),
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        }
+      );
+
+      response.then((res) => {
+        console.log(res?.data?.user, 'response');
+        if (res?.data?.status) {
+          // setAuthState({
+          //   userToken: res?.data?.user,
+          // });
+          
+          document.cookie = `token=${res?.data?.token}; path=/; max-age=86400`;
+        }
+
+        if (!res?.data?.status) {
+
+          // setError(res?.data?.msg);
+          // errorRef.current.focus();
+          console.log(res?.data?.msg);
+        }
+      });
+      response.catch((err) => {
+        // setError(err?.message);
+        console.log(err);
+        // errorRef.current.focus();
+      });
+
+      // const uid = authState?.userToken;
+      // navigate(`/twin/${uid}`, { replace: true });
+    } catch (error) {
+      if (!error.response) {
+        setError('Network Error');
+      }
+      setError(error?.message);
+    }
+  }
+  const verifyUser = () => {
+    try {
+      const response = axios.post(verifyRoute, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:3001',
+          Authorization: `Bearer ${getToken()}`,
+        },
+        withCredentials: true,
+      });
+
+      response.then((res) => {
+        console.log(res?.data?.user, 'response');
+        if (res?.data?.status) {
+          // authState({
+          //   userToken: res?.data?.user,
+          // });
+          console.log('verified');
+        } else {
+          console.log('not verified');
+          // navigate('/login', { replace: true });
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getToken = () => {
+    const cookie = document.cookie
+      .split(';')
+      .find((cookie) => cookie.startsWith('token='));
+    if (cookie) {
+      return cookie.split('=')[1];
+    }
+    return null;
+  };
   return (
     <div id='login'>
       <div className='h-screen flex flex-1 overflow-none flex-col justify-center px-6 py-12 lg:px-8 drop-shadow-2xl backdrop-blur-sm backdrop-opacity-80 backdrop-saturate-200'>
@@ -33,6 +132,7 @@ const Login = () => {
               </label>
               <div className='mt-2'>
                 <input
+                  ref={emailRef}
                   id='email'
                   name='email'
                   type='email'
@@ -62,6 +162,7 @@ const Login = () => {
               </div>
               <div className='mt-2'>
                 <input
+                  ref={passwordRef}
                   id='password'
                   name='password'
                   type='password'
@@ -74,6 +175,7 @@ const Login = () => {
 
             <div>
               <button
+                onClick={handleSignIn}
                 type='submit'
                 className='flex w-full justify-center rounded-md bg-twingreen-50 px-3 py-1.5 text-sm font-bold leading-6 text-black shadow-sm hover:bg-twingreen-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-twingreen-50'
               >
