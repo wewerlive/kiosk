@@ -5,10 +5,12 @@ import { BeakerIcon } from '@heroicons/react/24/outline';
 import { CubeTransparentIcon } from '@heroicons/react/24/outline';
 import Projects from '../pages/Projects';
 import Design from '../pages/Design';
+import { PlusMarkSvg } from '../assets/Svg';
+import { Newsletters } from '../pages/SignUp';
 
 const menuItems = [
   {
-    name: 'Kiosk',
+    name: 'Devices',
     icon: (
       <CubeTransparentIcon
         strokeWidth='3'
@@ -17,7 +19,7 @@ const menuItems = [
     ),
   },
   {
-    name: 'Designs',
+    name: 'Projects',
     icon: (
       <FolderOpenIcon
         strokeWidth='3'
@@ -38,13 +40,14 @@ const menuItems = [
 
 const Content = () => {
   return (
-    <div className='p-4 sm:ml-64 h-full w-full bg-gray-800 overflow-scroll'>
+    <div className='p-4 sm:ml-64 h-screen w-full bg-gray-800 overflow-scroll'>
       <div className='flex flex-col'>
         <Banner />
         <Home />
         {/* <Projects /> */}
         {/* <Design /> */}
       </div>
+      <Newsletters />
     </div>
   );
 };
@@ -54,17 +57,26 @@ export default Content;
 const Home = () => {
   return (
     <>
+      <div
+        id='devices'
+        className='flex justify-center items-center tracking-widest mt-8 text-5xl font-bold text-gray-200'
+      >
+        Build Beyond Reality
+      </div>
       {menuItems.map((item, index) => (
         <div key={index}>
           <div
             id={item.name}
-            className='flex items-center gap-x-2 my-6'
+            className='flex items-center gap-x-8 my-6'
           >
             {item.icon}
             <h1 className='text-gray-200 text-lg text-start font-bold tracking-tight md:text-xl lg:text-3xl'>
               {item.name}
             </h1>
             <hr className='w-full' />
+            <button className='p-1 border-2 rounded bg-twinpurple-300'>
+              <PlusMarkSvg size={`h-4 w-4`} />
+            </button>
           </div>
           <ItemBox />
         </div>

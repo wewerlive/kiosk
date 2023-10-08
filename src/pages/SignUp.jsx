@@ -110,7 +110,7 @@ export default SignUp;
 export const Newsletters = () => {
   return (
     <>
-      <div className='max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-16 mx-auto bg-gray-800'>
+      <div className='max-w-screen px-4 py-10 sm:px-6 lg:px-8 lg:py-16 mx-auto bg-gray-800'>
         <div className='grid md:grid-cols-2 gap-8'>
           <div className='max-w-md'>
             <h2 className='text-2xl font-bold md:text-3xl md:leading-tight dark:text-white'>

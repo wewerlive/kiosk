@@ -5,7 +5,7 @@ import './login.css';
 
 const Login = () => {
   return (
-    <div id='login'>
+    <div id='login' className='w-screen'>
       <div className='h-screen flex flex-1 overflow-none flex-col justify-center px-6 py-12 lg:px-8 drop-shadow-2xl backdrop-blur-sm backdrop-opacity-80 backdrop-saturate-200'>
         <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
           <img

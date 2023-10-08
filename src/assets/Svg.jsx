@@ -46,10 +46,11 @@ export const SearchIconSvg = () => {
   );
 };
 
-export const PlusMarkSvg = () => {
+export const PlusMarkSvg = (props) => {
+  const { size } = props;
   return (
     <svg
-      className='w-4 h-4'
+      className={size}
       aria-hidden='true'
       xmlns='http://www.w3.org/2000/svg'
       fill='none'

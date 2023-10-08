@@ -5,9 +5,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
   { name: 'Dashboard', href: '/app/home', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '/app/projects', current: false },
-  { name: 'Calendar', href: '/app/dates', current: false },
+  // { name: 'Team', href: '#', current: false },
+  // { name: 'Projects', href: '/app/projects', current: false },
+  // { name: 'Calendar', href: '/app/dates', current: false },
 ];
 
 function classNames(...classes) {
@@ -15,14 +15,22 @@ function classNames(...classes) {
 }
 
 export default function Header() {
+  const user = [
+    {
+      link: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+    },
+    {
+      link: 'https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+    },
+  ];
   return (
     <Disclosure
       as='nav'
-      className='bg-gray-800 w-screen drop-shadow-2xl sticky top-0 z-50'
+      className='bg-gray-800 w-screen sticky top-0 z-50'
     >
       {({ open }) => (
         <>
-          <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
+          <div className='mx-auto px-2 sm:px-6 lg:px-8'>
             <div className='relative flex h-16 items-center justify-between'>
               <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
                 {/* Mobile menu button*/}
@@ -76,11 +84,15 @@ export default function Header() {
                   className='relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
                 >
                   <span className='absolute -inset-1.5' />
-                  <span className='sr-only'>View notifications</span>
-                  <BellIcon
-                    className='h-6 w-6'
-                    aria-hidden='true'
-                  />
+                  <div className='hidden sm:ml-6 sm:block'>
+                    <div className='flex space-x-4'>
+                      {navigation.map((item) => (
+                        <button className='text-gray-100 hover:bg-gray-700 rounded-md px-3 py-2 text-sm font-medium bg-gray-900'>
+                          Sign Out
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </button>
 
                 {/* Profile dropdown */}
@@ -92,71 +104,20 @@ export default function Header() {
                     <Menu.Button className='relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
                       <span className='absolute -inset-1.5' />
                       <span className='sr-only'>Open user menu</span>
-                      <div className='flex -space-x-2'>
-                        <img
-                          className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
-                          src='https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80'
-                          alt='Image Description'
-                        />
-                        <img
-                          className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
-                          src='https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80'
-                          alt='Image Description'
-                        />
-                      </div>
+                      {user.map((item, index) => (
+                        <div
+                          key={index}
+                          className='flex -space-x-2'
+                        >
+                          <img
+                            className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
+                            src={item.link}
+                            alt='Image Description'
+                          />
+                        </div>
+                      ))}
                     </Menu.Button>
                   </div>
-                  <Transition
-                    as={Fragment}
-                    enter='transition ease-out duration-100'
-                    enterFrom='transform opacity-0 scale-95'
-                    enterTo='transform opacity-100 scale-100'
-                    leave='transition ease-in duration-75'
-                    leaveFrom='transform opacity-100 scale-100'
-                    leaveTo='transform opacity-0 scale-95'
-                  >
-                    <Menu.Items className='absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-gray-800 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href='#'
-                            className={classNames(
-                              active ? 'bg-gray-600' : '',
-                              'block px-4 py-2 text-sm text-gray-200 rounded-md mx-2.5 my-2.5'
-                            )}
-                          >
-                            Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href='#'
-                            className={classNames(
-                              active ? 'bg-gray-600' : '',
-                              'block px-4 py-2 text-sm text-gray-200 rounded-md mx-2.5 my-2.5'
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href='#'
-                            className={classNames(
-                              active ? 'bg-gray-600' : '',
-                              'block px-4 py-2 text-sm text-gray-200 rounded-md mx-2.5 my-2.5'
-                            )}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
                 </Menu>
               </div>
             </div>
