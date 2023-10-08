@@ -31,7 +31,7 @@ const SidebarHandler = () => {
   return (
     <div className='flex gap-x-2'>
       <button className='border-2 p-2 rounded-lg bg-slate-600'>
-        <PlusMarkSvg />
+        <PlusMarkSvg size={`h-4 w-4`} />
       </button>
       <div className='border-2 w-32 bg-slate-200 flex justify-between items-center rounded-lg'>
         <button className='hover:bg-zinc-600 p-1 rounded-md w-8'>

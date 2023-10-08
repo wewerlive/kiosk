@@ -7,10 +7,10 @@ import Layout from './Layout/Layout.jsx';
 import App from './App.jsx';
 import './index.css';
 import Login from './pages/LogIn.jsx';
-import Canvas from './pages/Canvas.jsx';
 import MoreInfo from './pages/MoreInfo.jsx';
 import SignUp from './pages/SignUp.jsx';
 import Projects from './pages/Projects.jsx';
+import Editor from './pages/Editor.jsx';
 
 const Router = createBrowserRouter([
   {
@@ -34,7 +34,7 @@ const Router = createBrowserRouter([
       },
       {
         path: '/app/:id',
-        element: <Canvas />,
+        element: <Editor />,
         errorElement: <Error />,
       },
       {
