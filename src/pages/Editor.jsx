@@ -5,13 +5,34 @@ import { PlusMarkSvg } from '../assets/Svg';
 import { siteState } from '../state/siteState';
 import { useSnapshot } from 'valtio';
 import axios from '../api/Axios';
-import { getDesignRoute } from '../api/routes';
+import { getDesignRoute, fileUploadRoute } from '../api/routes';
 
 const Editor = () => {
-  const labId = useParams().id;
-  console.log(labId);
+  const designId = useParams().id;
+  let labId = designId
+  console.log(designId);
 
+  axios.get(getDesignRoute, {
+    designId: designId
+  }).then((res) => {
+    console.log(res.data);
+  });
 
+  function uploadAsset(e) {
+    e.preventDefault();
+    console.log(e.target.files[0]);
+    const formData = new FormData();
+    formData.append('file', e.target.files[0]);
+    axios.post(fileUploadRoute, formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      },
+    ).then((res) => {
+      console.log(res.data);
+    });
+  }
 
   return (
     <>
@@ -25,7 +46,9 @@ const Editor = () => {
             <button className='rounded-full m-2 bg-gray-300 text-2xl p-2 drop-shadow-xl'>
               👗
             </button>
+
             {/* if labId === 0 then cosmetic lab if === 1 then Lens lab if === 2 then dress lab if === 3 then shoes lab */}
+
             {labId === '0' ? (
               <p className='text-lg font-semibold tracking-wider'>
                 Cosmetic Lab
@@ -41,9 +64,9 @@ const Editor = () => {
           <hr className='mb-4 mt-2' />
           <div className='flex gap-x-2 justify-center items-center mb-4'>
             <h2 className='text-xl text-start mb-2 font-semibold tracking-wider'>
-            Assets
-          </h2>
-          <hr className='w-full border-double rounded-xl mb-1' />
+              Assets
+            </h2>
+            <hr className='w-full border-double rounded-xl mb-1' />
           </div>
           <div className='p-4 border-2 border-gray-200 border-dashed rounded-lg'>
             <div className='grid grid-cols-2 gap-4'>
@@ -82,10 +105,17 @@ const Editor = () => {
               </div>
             </div>
           </div>
+          <div className='w-full mt-4 overflow-hidden border-none'>
+            <input type='file' className='rounded-md hover:bg-gray-400 hover:text-gray-800 border-none' onChange={(e) => {
+              uploadAsset(e)
+            }} />
+          </div>
         </div>
+
       </aside>
       <main className='bg-white h-full w-screen border-2'>game of throme</main>
     </>
   );
 };
+
 export default Editor;
