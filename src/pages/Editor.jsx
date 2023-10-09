@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { PlusMarkSvg } from '../assets/Svg';
 
 const Editor = () => {
   const labId = useParams().id;
@@ -22,33 +23,54 @@ const Editor = () => {
                 Cosmetic Lab
               </p>
             ) : labId === '1' ? (
-              <p className='text-lg font-semibold tracking-wider'>
-                Shades Lab
-              </p>
+              <p className='text-lg font-semibold tracking-wider'>Shades Lab</p>
             ) : labId === '2' ? (
-              <p className='text-lg font-semibold tracking-wider'>
-                Dress Lab
-              </p>
+              <p className='text-lg font-semibold tracking-wider'>Dress Lab</p>
             ) : labId === '3' ? (
-              <p className='text-lg font-semibold tracking-wider'>
-                Shoes Lab
-              </p>
+              <p className='text-lg font-semibold tracking-wider'>Shoes Lab</p>
             ) : null}
           </div>
-          <hr className='mt-2'/>
-          <div className='w-full mt-2 text-start px-1'>
-            <h2 className='text-2xl'>
-              Assets
-            </h2>
-            <div className='grid grid-row-3'>
-              <div className='w-full h-24 border-2 border-gray-300 rounded-md'>
-                <p className='text-2xl text-center'>👗</p>
+          <hr className='mb-4 mt-2' />
+          <div className='flex gap-x-2 justify-center items-center mb-4'>
+            <h2 className='text-xl text-start mb-2 font-semibold tracking-wider'>
+            Assets
+          </h2>
+          <hr className='w-full border-double rounded-xl mb-1' />
+          </div>
+          <div className='p-4 border-2 border-gray-200 border-dashed rounded-lg'>
+            <div className='grid grid-cols-2 gap-4'>
+              <div className='flex flex-grow items-center justify-center h-20 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'>
+                <button className='text-2xl text-gray-400 bg-gray-200 p-2 rounded-lg hover:bg-gray-700 backdrop-blur-3xl drop-shadow-2xl'>
+                  <PlusMarkSvg size={`h-1 w-1`} />
+                </button>
               </div>
-              <div className='w-full h-24 border-2 border-gray-300 rounded-md'>
-                <p className='text-2xl text-center'>👗</p>
+
+              {/* / */}
+              <div className='flex flex-grow items-center justify-center h-20 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'>
+                <button className='text-2xl text-gray-400 bg-gray-200 p-2 rounded-lg hover:bg-gray-700 backdrop-blur-3xl drop-shadow-2xl'>
+                  <PlusMarkSvg size={`h-1 w-1`} />
+                </button>
               </div>
-              <div className='w-full h-24 border-2 border-gray-300 rounded-md'>
-                <p className='text-2xl text-center'>👗</p>
+
+              {/* / */}
+              <div className='flex flex-grow items-center justify-center h-20 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'>
+                <button className='text-2xl text-gray-400 bg-gray-200 p-2 rounded-lg hover:bg-gray-700 backdrop-blur-3xl drop-shadow-2xl'>
+                  <PlusMarkSvg size={`h-1 w-1`} />
+                </button>
+              </div>
+
+              {/* / */}
+              <div className='flex flex-grow items-center justify-center h-20 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'>
+                <button className='text-2xl text-gray-400 bg-gray-200 p-2 rounded-lg hover:bg-gray-700 backdrop-blur-3xl drop-shadow-2xl'>
+                  <PlusMarkSvg size={`h-1 w-1`} />
+                </button>
+              </div>
+
+              {/* / */}
+              <div className='flex flex-grow items-center justify-center h-20 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'>
+                <button className='text-2xl text-gray-400 bg-gray-200 p-2 rounded-lg hover:bg-gray-700 backdrop-blur-3xl drop-shadow-2xl'>
+                  <PlusMarkSvg size={`h-1 w-1`} />
+                </button>
               </div>
             </div>
           </div>
