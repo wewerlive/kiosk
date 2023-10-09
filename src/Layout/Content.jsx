@@ -7,6 +7,9 @@ import Projects from '../pages/Projects';
 import Design from '../pages/Design';
 import { PlusMarkSvg } from '../assets/Svg';
 import { Newsletters } from '../pages/SignUp';
+import { siteState } from '../state/siteState';
+import axios from '../api/Axios';
+
 
 const menuItems = [
   {
@@ -73,7 +76,12 @@ const Home = () => {
             {menuItems[0].name}
           </h1>
           <hr className='w-full' />
-          <button className='p-1 border-2 rounded bg-twinpurple-300'>
+          <button className='p-1 border-2 rounded bg-twinpurple-300' onClick={(e)=>{
+            e.preventDefault();
+            siteState.devicePairModal = true;
+            console.log(siteState.devicePairModal);
+            
+          }}>
             <PlusMarkSvg size={`h-4 w-4`} />
           </button>
         </div>
@@ -89,7 +97,10 @@ const Home = () => {
             {menuItems[1].name}
           </h1>
           <hr className='w-full' />
-          <button className='p-1 border-2 rounded bg-twinpurple-300'>
+          <button className='p-1 border-2 rounded bg-twinpurple-300' onClick={(e)=>{
+            e.preventDefault()
+            siteState.projectListModal = true;
+          }}>
             <PlusMarkSvg size={`h-4 w-4`} />
           </button>
         </div>

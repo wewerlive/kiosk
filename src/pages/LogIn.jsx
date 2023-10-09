@@ -3,12 +3,19 @@ import Footer from '../components/Footer';
 import { Newsletters } from './SignUp';
 import './login.css';
 import { useEffect, useRef } from 'react';
-import { loginRoute,verifyRoute } from '../api/routes';
+import { loginRoute, verifyRoute } from '../api/routes';
 import axios from '../api/Axios';
 
+import { siteState } from '../state/siteState';
+import { useSnapshot } from 'valtio';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const siteSnap = useSnapshot(siteState);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (getToken()) {
       console.log(getToken(), 'token');
@@ -20,7 +27,7 @@ const Login = () => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     try {
-      const response = axios.post(
+      const response = axios.post(  
         loginRoute,
         JSON.stringify({
           username: email,
@@ -36,18 +43,22 @@ const Login = () => {
 
       response.then((res) => {
         console.log(res?.data?.user, 'response');
+        console.log(res?.data)
         if (res?.data?.status) {
           // setAuthState({
           //   userToken: res?.data?.user,
           // });
-          
-          document.cookie = `token=${res?.data?.token}; path=/; max-age=86400`;
-        }
 
+          siteState.userData = res?.data
+          navigate('/app/home', { replace: true });
+          document.cookie = `token=${res?.data?.token}; path=/; max-age=86400`;
+          
+        }
         if (!res?.data?.status) {
 
           // setError(res?.data?.msg);
           // errorRef.current.focus();
+          console.log(res?.data);
           console.log(res?.data?.msg);
         }
       });

@@ -2,6 +2,15 @@ import { Link } from 'react-router-dom';
 import './styles/loader.css';
 import { useState } from 'react';
 
+export  const getToken = () => {
+  const cookie = document.cookie
+    .split(';')
+    .find((cookie) => cookie.startsWith('token='));
+  if (cookie) {
+    return cookie.split('=')[1];
+  }
+  return null;
+};
 export const Loader = () => {
   return (
     <div className='loader-parent'>

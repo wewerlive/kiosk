@@ -33,7 +33,7 @@ const Router = createBrowserRouter([
         errorElement: <Error />,
       },
       {
-        path: '/app/:id',
+        path: '/app/design/:id',
         element: <Editor />,
         errorElement: <Error />,
       },

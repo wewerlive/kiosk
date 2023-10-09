@@ -2,9 +2,17 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PlusMarkSvg } from '../assets/Svg';
+import { siteState } from '../state/siteState';
+import { useSnapshot } from 'valtio';
+import axios from '../api/Axios';
+import { getDesignRoute } from '../api/routes';
 
 const Editor = () => {
   const labId = useParams().id;
+  console.log(labId);
+
+
+
   return (
     <>
       <aside

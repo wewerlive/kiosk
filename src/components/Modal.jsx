@@ -1,13 +1,30 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSnapshot } from "valtio";
+import { siteState } from "../state/siteState";
+import axios from "../api/Axios";
+import { addDesignRoute } from "../api/routes";
 
-export const DevicePair = (props) => {
+const getToken = () => {
+  console.log(document.cookie);
+  const cookie = document.cookie
+    .split(';')
+    .find((cookie) => cookie.startsWith('token='));
+  if (cookie) {
+    return cookie.split('=')[1];
+  }
+  return null;
+};
+
+
+
+export const DevicePair = () => {
   const [active, setActive] = useState(true);
-
+  let siteSnap = useSnapshot(siteState);
   return (
     <div
       className={
-        props.open
+        siteSnap.devicePairModal
           ? 'absolute h-full w-screen z-40 backdrop-blur-md text-black flex justify-center items-center'
           : 'hidden'
       }
@@ -21,7 +38,7 @@ export const DevicePair = (props) => {
           <div class='relative bg-gray-200 rounded-lg shadow dark:bg-gray-700'>
             <button
               type='button'
-              onClick={() => setActive(!active)}
+              onClick={() => siteState.devicePairModal = false}
               class='absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white'
               data-modal-hide='popup-modal'
             >
@@ -79,8 +96,30 @@ export const DevicePair = (props) => {
 
 export const ProjectList = (props) => {
   const [active, setActive] = useState(true);
+
   const navigate = useNavigate();
 
+  function addDesign(designName, labType) {
+  
+    axios.post(addDesignRoute, {
+      designName: designName,
+      labType: labType,
+      username: siteState.userData.user,
+    }, {
+      // headers: {  
+      //   'Content-Type': 'application/json',
+      //   'Access-Control-Allow-Origin': 'http://localhost:3001',
+      //   Authorization: `Bearer ${getToken()}`,
+      // },
+      withCredentials: true,
+  
+    }).then((res) => {
+      console.log(res.data);
+      navigate(`/app/design/${res.data.design._id}`);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
   const Lab = [
     {
       icon: '💄',
@@ -102,7 +141,7 @@ export const ProjectList = (props) => {
   return (
     <div
       className={
-        active
+        siteState.projectListModal
           ? 'absolute h-full w-screen z-40 backdrop-blur-md text-black flex justify-center items-center'
           : 'hidden'
       }
@@ -116,7 +155,7 @@ export const ProjectList = (props) => {
           <div class='relative bg-gray-200 rounded-lg shadow dark:bg-gray-700'>
             <button
               type='button'
-              onClick={() => setActive(!active)}
+              onClick={() => siteState.projectListModal = false}
               class='absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white'
               data-modal-hide='popup-modal'
             >
@@ -144,7 +183,9 @@ export const ProjectList = (props) => {
                   <button
                     key={i}
                     className='flex flex-col items-center'
-                    onClick={() => navigate(`/app/${i}`)}
+                    onClick={() => {
+                      addDesign("Copy of " + name, name);
+                    }}
                   >
                     <p className='w-16 h-16 rounded-full hover:border-twinpurple-500 hover:border-2 flex justify-center items-center bg-gray-100 drop-shadow-2xl'>
                       {icon}{' '}
