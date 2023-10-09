@@ -43,21 +43,41 @@ export const ProjectItemBox = () => {
 };
 
 export const LabBox = () => {
-  const emojis = ['💄', '🕶️', '👗', '👟'];
+  const icons = [
+    {
+      icon: '👕',
+      name: 'Dress'
+    },
+    {
+      icon: '👟',
+      name: 'Shoes'
+    },
+    {
+      icon: '🕶️',
+      name: 'Shades'
+    },
+    {
+      icon: '💄',
+      name: 'Cosmetic'
+    }
+  ];
   return (
     <div className='p-4 border-2 border-gray-200 border-dashed rounded-lg'>
       <div className='grid grid-cols-4 gap-4'>
-        {emojis.map((e, i) => (
+        {icons.map((e, i) => (
           <div
             key={i}
-            className='flex flex-grow items-center justify-center h-44 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'
+            className='flex flex-col gap-y-2 flex-grow items-center justify-center h-44 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'
           >
             <button
               onClick={() => navigate(`/app/${i}`)}
               className='text-2xl text-gray-400 bg-gray-200 p-4 rounded-full hover:bg-gray-700 backdrop-blur-3xl drop-shadow-2xl shadow-2xl'
             >
-              {e}
+              {e.icon}
             </button>
+            <p className='text-center uppercase tracking-widest font-semibold text-lg text-gray-200 drop-shadow-2xl'>
+              {e.name}
+            </p>
           </div>
         ))}
       </div>
