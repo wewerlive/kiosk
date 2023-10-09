@@ -33,6 +33,13 @@ export const ProjectItemBox = () => {
     <div className='p-4 border-2 border-gray-200 border-dashed rounded-lg'>
       <div className='grid grid-cols-4 gap-4'>
         <div className='flex flex-grow items-center justify-center h-44 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'>
+          <button className='text-2xl text-gray-400 p-4 rounded-lg'>
+            <p className='text-center tracking-tight font-semibold text-lg text-gray-900 drop-shadow-2xl'>
+              Copy of Cosmetic Lab
+            </p>
+          </button>
+        </div>
+        <div className='flex flex-col gap-y-2 flex-grow items-center justify-center h-44 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500'>
           <button className='text-2xl text-gray-400 bg-gray-200 p-2 rounded-lg hover:bg-gray-700 backdrop-blur-3xl drop-shadow-2xl'>
             <PlusMarkSvg size={`h-4 w-4`} />
           </button>
@@ -46,20 +53,20 @@ export const LabBox = () => {
   const icons = [
     {
       icon: '👕',
-      name: 'Dress'
+      name: 'Dress',
     },
     {
       icon: '👟',
-      name: 'Shoes'
+      name: 'Shoes',
     },
     {
       icon: '🕶️',
-      name: 'Shades'
+      name: 'Shades',
     },
     {
       icon: '💄',
-      name: 'Cosmetic'
-    }
+      name: 'Cosmetic',
+    },
   ];
   return (
     <div className='p-4 border-2 border-gray-200 border-dashed rounded-lg'>
