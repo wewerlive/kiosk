@@ -42,6 +42,10 @@ export default {
           500: '#2c2747',
         },
       },
+      backgroundImage: {
+        kiosk:
+          "url('https://4.imimg.com/data4/GV/XI/MY-2783894/fashion-kiosk-500x500.jpg')",
+      },
     },
   },
   plugins: [
