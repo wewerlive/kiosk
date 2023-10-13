@@ -1,4 +1,4 @@
-export const host = 'http://172.17.33.235:3001';
+export const host = 'http://192.168.101.40:3001';
 export const loginRoute = "/api/auth/login"
 export const registerRoute = "/api/auth/register"
 export const verifyRoute = "/api/auth/verifyUser"
@@ -7,3 +7,4 @@ export const addDesignRoute = "/api/auth/addDesign"
 export const getDesignsRoute = "/api/auth/getDesigns"
 export const getDesignRoute = "/api/auth/getDesign"
 export const fileUploadRoute = "/api/Asset/upload"
+export const getAssetsRoute = "/api/Asset/getAssets"

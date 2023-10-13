@@ -96,9 +96,9 @@ export const DevicePair = () => {
 
 export const ProjectList = (props) => {
   const [active, setActive] = useState(true);
-
+  let siteSnap = useSnapshot(siteState);
+  console.log(siteSnap);
   const navigate = useNavigate();
-
   function addDesign(designName, labType) {
   
     axios.post(addDesignRoute, {
