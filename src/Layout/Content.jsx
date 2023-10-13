@@ -8,8 +8,9 @@ import Design from '../pages/Design';
 import { PlusMarkSvg } from '../assets/Svg';
 import { Newsletters } from '../pages/SignUp';
 import { siteState } from '../state/siteState';
+import { useSnapshot } from 'valtio';
 import axios from '../api/Axios';
-
+import { getAssetsRoute } from '../api/routes';
 
 const menuItems = [
   {
@@ -42,6 +43,11 @@ const menuItems = [
 ];
 
 const Content = () => {
+  let siteSnap = useSnapshot(siteState);
+  axios.get(getAssetsRoute + "/" + siteSnap.userData.user).then((res) => {
+    siteState.assets = res.data.assets;
+    console.log(res.data);
+  });
   return (
     <div className='p-4 sm:ml-64 h-screen w-full bg-gray-800 overflow-scroll'>
       <div className='flex flex-col'>
