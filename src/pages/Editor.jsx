@@ -118,6 +118,15 @@ const Editor = () => {
           </div>
         </aside>
         <main className="bg-white" style={{ width: "100%" }}>
+          <button className="absolute right-0 p-5 text-black z-10 backdrop-blur-sm" onClick={(e)=>{
+            axios.post("http://localhost:3001/api/auth/updateDesign",{
+              design: siteSnap.design,
+              assets:siteState.design.assets
+            })
+            console.log(siteState.design.assets)
+          }}>
+            Publish
+          </button>
           <Canvas style={{ height: "100%", width: "100%" }}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />

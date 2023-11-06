@@ -1,4 +1,4 @@
-export const host = 'http://192.168.101.40:3001';
+export const host = 'http://localhost:3001';
 export const loginRoute = "/api/auth/login"
 export const registerRoute = "/api/auth/register"
 export const verifyRoute = "/api/auth/verifyUser"

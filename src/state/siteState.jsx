@@ -4,5 +4,7 @@ export const siteState = proxy({
     userData:null,
     devicePairModal:false,
     projectListModal:false,
-    design:null,
+    design:{
+        assets:[]
+    }
 });

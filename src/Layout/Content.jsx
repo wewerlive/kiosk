@@ -10,7 +10,7 @@ import { Newsletters } from '../pages/SignUp';
 import { siteState } from '../state/siteState';
 import { useSnapshot } from 'valtio';
 import axios from '../api/Axios';
-import { getAssetsRoute } from '../api/routes';
+import { getAssetsRoute, getDesignsRoute } from '../api/routes';
 
 const menuItems = [
   {
@@ -48,6 +48,10 @@ const Content = () => {
     siteState.assets = res.data.assets;
     console.log(res.data);
   });
+  axios.get(getDesignsRoute+"/"+siteSnap.userData.user).then((res)=>{
+    siteState.designs = res.data.designs;
+    console.log(res.data);
+  })
   return (
     <div className='p-4 sm:ml-64 h-screen w-full bg-gray-800 overflow-scroll'>
       <div className='flex flex-col'>
@@ -86,7 +90,7 @@ const Home = () => {
             e.preventDefault();
             siteState.devicePairModal = true;
             console.log(siteState.devicePairModal);
-            
+
           }}>
             <PlusMarkSvg size={`h-4 w-4`} />
           </button>
