@@ -82,14 +82,14 @@ const Editor = () => {
                         path={asset.filePath}
                         onClick={(e) => {
                           console.log(asset);
-                          if(siteState.design.assets === undefined){
+                          if (siteState.design.assets === undefined) {
                             siteState.design.assets = [];
                           }
                           console.log(siteState.design.assets)
-                          if(siteState.design.assets.includes(asset.assetPath)){
+                          if (siteState.design.assets.includes(asset.assetPath)) {
                             siteState.design.assets = siteState.design.assets.filter((item) => item !== asset.assetPath);
                           }
-                          else{
+                          else {
                             siteState.design.assets.push(asset.assetPath);
                           }
                         }}
@@ -118,11 +118,16 @@ const Editor = () => {
           </div>
         </aside>
         <main className="bg-white" style={{ width: "100%" }}>
-          <button className="absolute right-0 p-5 text-black z-10 backdrop-blur-sm" onClick={(e)=>{
-            axios.post("http://localhost:3001/api/auth/updateDesign",{
+          <button className="absolute right-0 p-5 text-black z-10 backdrop-blur-sm" onClick={(e) => {
+            axios.post("http://localhost:3001/api/auth/updateDesign", {
               design: siteSnap.design,
-              assets:siteState.design.assets
-            })
+              assets: siteState.design.assets
+            }).then((response) => {
+              console.log(response);
+              window.open("http://localhost:3001/build/" + designId, "_blank")
+            }, (error) => {
+              console.log(error);
+            });
             console.log(siteState.design.assets)
           }}>
             Publish
@@ -130,6 +135,7 @@ const Editor = () => {
           <Canvas style={{ height: "100%", width: "100%" }}>
             <ambientLight />
             <pointLight position={[10, 10, 10]} />
+            <spotLight position={[15, 20, 5]} angle={0.3} />
             <OrbitControls />
             <Preview3D />
           </Canvas>
